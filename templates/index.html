@@ -81,28 +81,28 @@
     <div class="flexrow">
         <div class="pad"></div>
         <div class="flexrowitem">
-            <div class="singledisplaysmall">TAB move focus</div>
+            <div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display1">_</div>
+            <div class="singledisplay" id="frqdisplay1">_</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display2">_</div>
+            <div class="singledisplay" id="frqdisplay2">_</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display3">_</div>
+            <div class="singledisplay" id="frqdisplay3">_</div>
         </div>
         <div class="flexrowitem">
             <div class="singledisplay">.</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display4">_</div>
+            <div class="singledisplay" id="frqdisplay4">_</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display5">_</div>
+            <div class="singledisplay" id="frqdisplay5">_</div>
         </div>
         <div class="flexrowitem">
-            <div class="singledisplay" id="display6">_</div>
+            <div class="singledisplay" id="frqdisplay6">_</div>
         </div>
         <div class="pad"></div>
     </div>
@@ -152,11 +152,24 @@
 
         focusindex = 0
         csindex = 1
+        frqindex = 1
         shift = false
 
         document.addEventListener("keydown", onkeydown)
         document.addEventListener("keyup", onkeyup)
         function onkeydown(e){
+            if(focusindex == 0){
+                cskeyevent(e)
+            }else if(focusindex == 1){
+                frqkeyevent(e)
+            }
+        }
+        function onkeyup(e){
+            if(e.key == "Shift"){
+                shift = false
+            }
+        }
+        function cskeyevent(e){
             key = e.key
             console.log(key)
             key = key.toLocaleUpperCase()
@@ -172,13 +185,28 @@
                 csindex -= 1
             }else if(key == "SHIFT"){
                 shift = true
+            }else if(key == "ENTER"){
+                focusindex += 1
             }else{
                 return
             }
         }
-        function onkeyup(e){
-            if(e.key == "Shift"){
-                shift = false
+        function frqkeyevent(e){
+            key = e.key
+            console.log(key)
+            key = key.toLocaleUpperCase()
+            console.log(key)
+            console.log(key.charCodeAt(), key.length, key.length == 1)
+            if(48 <= key.charCodeAt(0) && key.charCodeAt(0) <= 57 && frqindex <= 6 && key.length == 1){
+                $("frqdisplay" + frqindex).innerHTML = key
+                frqindex += 1
+            }else if(key == "BACKSPACE" && frqindex > 1) {
+                $("frqdisplay" + (frqindex-1)).innerHTML = "_"
+                frqindex -= 1
+            }else if(key == "SHIFT"){
+                shift = true
+            }else{
+                return
             }
         }
     </script>
