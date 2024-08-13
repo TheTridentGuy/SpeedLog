@@ -20,6 +20,11 @@
             max-width: 12vw;
             margin: 1vmin;
         }
+        .flexrowitemfull {
+            flex-grow: 1;
+            padding: 1vmin;
+            margin: 1vmin;
+        }
         .singledisplay {
             text-align: center;
             height: 12vw;
@@ -42,13 +47,16 @@
             width: 100%;
             text-align: center;
         }
+        #date {
+            font-size: larger;
+        }
     </style>
 </head>
 <body>
     <h2>Callsign (type to enter):</h2>
     <div class="flexrow">
         <div class="pad"></div>
-        <div class="flexrowitem">
+        <div class="flexrowitem" id="csfocus">
             <div class="singledisplay">></div>
         </div>
         <div class="flexrowitem">
@@ -80,7 +88,7 @@
     <h2>Frequency (type to enter):</h2>
     <div class="flexrow">
         <div class="pad"></div>
-        <div class="flexrowitem">
+        <div class="flexrowitem" id="frqfocus">
             <div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>
         </div>
         <div class="flexrowitem">
@@ -104,7 +112,21 @@
         <div class="flexrowitem">
             <div class="singledisplay" id="frqdisplay6">_</div>
         </div>
+        <div class="flexrowitem">
+            <label for="mhz">MHz</label>
+            <input type="checkbox" name="mhz" id="mhz" checked>
+            <label for="khz">kHz</label>
+            <input type="checkbox" name="khz" id="khz">
+        </div>
         <div class="pad"></div>
+    </div>
+    <h2>Date:</h2>
+    <div class="flexrow">
+        <input class="flexrowitemfull" type="datetime-local" name="date" id="date" onchange="autosetdate=false">
+    </div>
+    <h2>Notes:</h2>
+    <div class="flexrow">
+        <textarea name="notes" id="notes" class="flexrowitemfull"></textarea>
     </div>
     <script>
         phonetic = {
@@ -154,11 +176,22 @@
         csindex = 1
         frqindex = 1
         shift = false
+        autosetdate = true
 
         document.addEventListener("keydown", onkeydown)
         document.addEventListener("keyup", onkeyup)
         function onkeydown(e){
-            if(focusindex == 0){
+            // TODO: figure oout how to check if a element is focused
+            if($("date").style.borderColor == "blue" || $("notes").style.borderColor == "blue"){
+                return
+            }
+            if(autosetdate){
+                document.getElementById("date").valueAsDate = new Date()
+            }
+            key = e.key
+            if(key == "SHIFT"){
+                shift = true
+            }else if(focusindex == 0){
                 cskeyevent(e)
             }else if(focusindex == 1){
                 frqkeyevent(e)
@@ -183,10 +216,8 @@
                 $("display" + (csindex-1)).innerHTML = "_"
                 $("phonetic" + (csindex-1)).innerHTML = "-"
                 csindex -= 1
-            }else if(key == "SHIFT"){
-                shift = true
             }else if(key == "ENTER"){
-                focusindex += 1
+                incrementfocus()
             }else{
                 return
             }
@@ -203,10 +234,30 @@
             }else if(key == "BACKSPACE" && frqindex > 1) {
                 $("frqdisplay" + (frqindex-1)).innerHTML = "_"
                 frqindex -= 1
-            }else if(key == "SHIFT"){
-                shift = true
+            }else if(key == "BACKSPACE" && frqindex <= 1){
+                decrementfocus()
             }else{
                 return
+            }
+        }
+        function incrementfocus(){
+            focusindex += 1
+            updatefocus()
+        }
+        function decrementfocus(){
+            focusindex -= 1
+            updatefocus()
+        }
+        function updatefocus(){
+            switch(focusindex){
+                case 0:
+                    $("csfocus").innerHTML = `<div class="singledisplay">></div>`
+                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>`
+                    break
+                case 1:
+                    $("csfocus").innerHTML = `<div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>`
+                    $("frqfocus").innerHTML = `<div class="singledisplay">></div>`
+                    break
             }
         }
     </script>
