@@ -89,7 +89,7 @@
     <div class="flexrow">
         <div class="pad"></div>
         <div class="flexrowitem" id="frqfocus">
-            <div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>
+            <div class="singledisplaysmall">ENTER to finish field and move to frequency</div>
         </div>
         <div class="flexrowitem">
             <div class="singledisplay" id="frqdisplay1">_</div>
@@ -127,6 +127,9 @@
     <h2>Notes:</h2>
     <div class="flexrow">
         <textarea name="notes" id="notes" class="flexrowitemfull"></textarea>
+    </div>
+    <div class="flexrow" style="display:none">
+        <h3 class="flexrowitemfull">Press ENTER again to confirm log info</h3>
     </div>
     <script>
         phonetic = {
@@ -185,9 +188,6 @@
             if($("date").style.borderColor == "blue" || $("notes").style.borderColor == "blue"){
                 return
             }
-            if(autosetdate){
-                document.getElementById("date").valueAsDate = new Date()
-            }
             key = e.key
             if(key == "SHIFT"){
                 shift = true
@@ -208,6 +208,9 @@
             key = key.toLocaleUpperCase()
             console.log(key)
             console.log(key.charCodeAt(), key.length, key.length == 1)
+            if(autosetdate && csindex == 1){
+                document.getElementById("date").valueAsDate = new Date()
+            }
             if(((65 <= key.charCodeAt(0) && key.charCodeAt(0) <= 90) || (48 <= key.charCodeAt(0) && key.charCodeAt(0) <= 57)) && csindex <= 6 && key.length == 1){
                 $("display" + csindex).innerHTML = key
                 $("phonetic" + csindex).innerHTML = phonetic[key]
@@ -252,10 +255,10 @@
             switch(focusindex){
                 case 0:
                     $("csfocus").innerHTML = `<div class="singledisplay">></div>`
-                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>`
+                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">ENTER to finish field and move to frequency</div>`
                     break
                 case 1:
-                    $("csfocus").innerHTML = `<div class="singledisplaysmall">TAB to move focus forward, ENTER to finish field</div>`
+                    $("csfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to clear charachter, or edit callsign if frequency is empty</div>`
                     $("frqfocus").innerHTML = `<div class="singledisplay">></div>`
                     break
             }
