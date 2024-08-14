@@ -128,7 +128,7 @@
     <div class="flexrow">
         <textarea name="notes" id="notes" class="flexrowitemfull" onfocus="ignorekey=true;ignoreclickflag=true"></textarea>
     </div>
-    <div class="flexrow" style="display:none">
+    <div class="flexrow" id="confirm" style="display:none">
         <h3 class="flexrowitemfull">Press ENTER again to confirm log info</h3>
     </div>
     <script>
@@ -183,6 +183,7 @@
         ignorekey = false
         ignoreclickflag = false
 
+        $("notes").value = ""
         document.addEventListener("keydown", onkeydown)
         document.addEventListener("keyup", onkeyup)
         function onkeydown(e){
@@ -196,6 +197,8 @@
                 cskeyevent(e)
             }else if(focusindex == 1){
                 frqkeyevent(e)
+            }else if(focusindex == 2){
+                confirmkeyevent(e)
             }
         }
         function onkeyup(e){
@@ -237,6 +240,19 @@
                 frqindex -= 1
             }else if(key == "BACKSPACE" && frqindex <= 1){
                 decrementfocus()
+            }else if(key == "ENTER"){
+                incrementfocus()
+            }else{
+                return
+            }
+        }
+        function confirmkeyevent(e){
+            key = e.key
+            key = key.toLocaleUpperCase()
+            if(key == "BACKSPACE"){
+                decrementfocus()
+            }else if(key == "ENTER"){
+                alert("log submitted")
             }else{
                 return
             }
@@ -254,10 +270,17 @@
                 case 0:
                     $("csfocus").innerHTML = `<div class="singledisplay">></div>`
                     $("frqfocus").innerHTML = `<div class="singledisplaysmall">ENTER to finish field and move to frequency</div>`
+                    $("confirm").style.display = "none"
                     break
                 case 1:
                     $("csfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to clear charachter, or edit callsign if frequency is empty</div>`
                     $("frqfocus").innerHTML = `<div class="singledisplay">></div>`
+                    $("confirm").style.display = "none"
+                    break
+                case 2:
+                    $("csfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to clear charachter, or edit callsign if frequency is empty</div>`
+                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to return to editing frequency</div>`
+                    $("confirm").style.display = "block"
                     break
             }
         }
