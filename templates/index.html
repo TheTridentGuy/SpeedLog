@@ -52,7 +52,7 @@
         }
     </style>
 </head>
-<body>
+<body onclick="if(ignoreclickflag){ignoreclickflag=false}else{ignorekey=false}">
     <h2>Callsign (type to enter):</h2>
     <div class="flexrow">
         <div class="pad"></div>
@@ -122,11 +122,11 @@
     </div>
     <h2>Date:</h2>
     <div class="flexrow">
-        <input class="flexrowitemfull" type="datetime-local" name="date" id="date" onchange="autosetdate=false">
+        <input class="flexrowitemfull" type="datetime-local" name="date" id="date" onchange="autosetdate=false" onfocus="ignorekey=true;ignoreclickflag=true">
     </div>
     <h2>Notes:</h2>
     <div class="flexrow">
-        <textarea name="notes" id="notes" class="flexrowitemfull"></textarea>
+        <textarea name="notes" id="notes" class="flexrowitemfull" onfocus="ignorekey=true;ignoreclickflag=true"></textarea>
     </div>
     <div class="flexrow" style="display:none">
         <h3 class="flexrowitemfull">Press ENTER again to confirm log info</h3>
@@ -180,12 +180,13 @@
         frqindex = 1
         shift = false
         autosetdate = true
+        ignorekey = false
+        ignoreclickflag = false
 
         document.addEventListener("keydown", onkeydown)
         document.addEventListener("keyup", onkeyup)
         function onkeydown(e){
-            // TODO: figure oout how to check if a element is focused
-            if($("date").style.borderColor == "blue" || $("notes").style.borderColor == "blue"){
+            if(ignorekey){
                 return
             }
             key = e.key
@@ -204,10 +205,7 @@
         }
         function cskeyevent(e){
             key = e.key
-            console.log(key)
             key = key.toLocaleUpperCase()
-            console.log(key)
-            console.log(key.charCodeAt(), key.length, key.length == 1)
             if(autosetdate && csindex == 1){
                 document.getElementById("date").valueAsDate = new Date()
             }
@@ -230,10 +228,7 @@
         }
         function frqkeyevent(e){
             key = e.key
-            console.log(key)
             key = key.toLocaleUpperCase()
-            console.log(key)
-            console.log(key.charCodeAt(), key.length, key.length == 1)
             if(48 <= key.charCodeAt(0) && key.charCodeAt(0) <= 57 && frqindex <= 6 && key.length == 1){
                 $("frqdisplay" + frqindex).innerHTML = key
                 frqindex += 1
