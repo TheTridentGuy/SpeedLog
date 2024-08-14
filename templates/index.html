@@ -114,9 +114,9 @@
         </div>
         <div class="flexrowitem">
             <label for="mhz">MHz</label>
-            <input type="checkbox" name="mhz" id="mhz" checked>
+            <input type="radio" name="unit" id="mhz" checked>
             <label for="khz">kHz</label>
-            <input type="checkbox" name="khz" id="khz">
+            <input type="radio" name="unit" id="khz">
         </div>
         <div class="pad"></div>
     </div>
@@ -215,6 +215,9 @@
                 $("display" + csindex).innerHTML = key
                 $("phonetic" + csindex).innerHTML = phonetic[key]
                 csindex += 1
+                if(csindex > 6) {
+                    incrementfocus()
+                }
             }else if(key == "BACKSPACE" && csindex > 1) {
                 $("display" + (csindex-1)).innerHTML = "_"
                 $("phonetic" + (csindex-1)).innerHTML = "-"
