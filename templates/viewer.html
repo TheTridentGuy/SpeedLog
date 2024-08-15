@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeedLog viewer</title>
+    <title>SpeedLog Viewer</title>
     <style>
         * {
             font-family: sans-serif;
@@ -15,10 +15,59 @@
         td:last-of-type {
             border-right: none;
         }
+        tr:hover {
+            background-color: #888;
+        }
+        #editor {
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            padding: 2vmin;
+            font-size: 5vmin;
+        }
+        table {
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>
+    <h1>Contacts:</h1>
     <table>
+        <tr>
+            <th>Callsign</th>
+            <th>Frequency</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>146.520</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>146.520</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>146.520</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>146.520</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer. I want it to be even longer now.</td>
+        </tr>
         <tr>
             <td>KO6ENZ</td>
             <td>Some Day</td>
@@ -43,6 +92,81 @@
             <td>Some Time</td>
             <td>Some fairly long notes. This ones a lot lot longer. I want it to be even longer now.</td>
         </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer. I want it to be even longer now.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer. I want it to be even longer now.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer</td>
+        </tr>
+        <tr>
+            <td>KO6ENZ</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes.</td>
+        </tr>
+        <tr>
+            <td>LAST00</td>
+            <td>Some Day</td>
+            <td>Some Time</td>
+            <td>Some fairly long notes. This ones a lot lot longer. I want it to be even longer now.</td>
+        </tr>
     </table>
+    <div id="editor">
+        <div>editor goes here</div>
+    </div>
 </body>
 </html>
