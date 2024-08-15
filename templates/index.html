@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeedLog</title>
     <style>
+        body {
+            height: 100%;
+        }
         * {
             font-family: sans-serif;
         }
@@ -49,6 +52,17 @@
         }
         #date {
             font-size: larger;
+        }
+        .flexcol {
+            display: flex;
+            flex-direction: column;
+        }
+        .flexcolitem {
+            flex-grow: 1;
+            height: 100%;
+        }
+        textarea {
+            height: 25vh;
         }
     </style>
 </head>
