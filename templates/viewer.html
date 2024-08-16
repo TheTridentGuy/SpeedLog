@@ -15,8 +15,11 @@
         td:last-of-type {
             border-right: none;
         }
-        tr:hover {
+        tr:nth-child(even) {
             background-color: #888;
+        }
+        tr:hover {
+            background-color: #555;
         }
         #editor {
             height: 15vmin;
@@ -63,6 +66,7 @@
             <td>Some Day</td>
             <td>Some Time</td>
             <td>Some fairly long notes.</td>
+            <td><button>Edit</button><button>Remove</button></td>
         </tr>
         <tr>
             <td>KO6ENZ</td>
