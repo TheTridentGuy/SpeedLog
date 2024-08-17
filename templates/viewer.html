@@ -47,6 +47,17 @@
             top: .125em;
             position: relative;
         }
+        button {
+            background-color: #777;
+            border-radius: 0;
+            border: none;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        td.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -63,6 +74,7 @@
     </h2>
     <table>
         <tr>
+            <td class="hidden">1</td>
             <th>Callsign</th>
             <th>Frequency</th>
             <th>Date</th>
@@ -70,6 +82,7 @@
             <th>Notes</th>
         </tr>
         <tr>
+            <td class="hidden">1</td>
             <td>KO6ENZ</td>
             <td>146.520</td>
             <td>Some Day</td>
@@ -81,6 +94,7 @@
             </td>
         </tr>
         <tr>
+            <td class="hidden">1</td>
             <td>KO6ENZ</td>
             <td>146.520</td>
             <td>Some Day</td>
@@ -261,5 +275,13 @@
     <div id="editor">
         <div>editor goes here</div>
     </div>
+    <script>
+        function remove() {
+
+        }
+        function edit() {
+
+        }
+    </script>
 </body>
 </html>
