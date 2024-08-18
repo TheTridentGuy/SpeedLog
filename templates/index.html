@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeedLog</title>
     <style>
-        body {
-            height: 100%;
+        body, html {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
         * {
             font-family: sans-serif;
@@ -60,9 +64,6 @@
         .flexcolitem {
             flex-grow: 1;
             height: 100%;
-        }
-        textarea {
-            height: 40vh;
         }
         #confirm {
             position: sticky;
@@ -271,7 +272,7 @@
             if(key == "BACKSPACE"){
                 decrementfocus()
             }else if(key == "ENTER"){
-                alert("log submitted")
+                sendlog()
             }else{
                 return
             }
@@ -302,6 +303,25 @@
                     $("confirm").style.display = "block"
                     break
             }
+        }
+        function sendlog(){
+            var callsign = ""
+            for(var i=1; i<=6; i++){
+                callsign += $("display"+i).innerHTML
+            }
+            var frq = ""
+            for(var i=1; i<=6; i++){
+                frq += $("frqdisplay"+i).innerHTML
+                if(i == 3){frq += "."}
+            }
+            datetime = $("date").valueAsDate.toLocaleString()
+            notes = $("notes").value
+            console.log(JSON.stringify({
+                "callsign": callsign,
+                "frequency": frq,
+                "date": datetime,
+                "notes": notes
+            }))
         }
     </script>
 </body>
