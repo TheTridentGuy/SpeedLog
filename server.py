@@ -20,7 +20,6 @@ def save_to_file():
         f.write(json.dumps(save_data))
 
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -36,8 +35,8 @@ def view():
     log_html = ""
     for counter, entry in enumerate(save_data):
         log_html += f"""<tr>
-            <td><input type="checkbox" class="selcheck"></td>
             <td class="hidden">{counter}</td>
+            <td><input type="checkbox" class="selcheck"></td>
             <td>{entry.get("callsign")}</td>
             <td>{entry.get("frequency")}</td>
             <td>{entry.get("date")}</td>
@@ -64,6 +63,22 @@ def log():
         return "success"
     else:
         return "missing/invalid data"
+
+
+@app.route("/dellog")
+def dellog():
+    index = request.values.get("index")
+    if index:
+        try:
+            index = int(index)
+        except TypeError:
+            return "invalid json"
+        print(index)
+        save_data.pop(index)
+        save_to_file()
+        return "success"
+    else:
+        return "missing index parameter"
 
 
 if __name__ == '__main__':

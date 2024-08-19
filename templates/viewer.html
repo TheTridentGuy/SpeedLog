@@ -136,8 +136,12 @@
     </div>
     <script>
         function remove(element) {
-            console.log(element.firstElementChild.innerHTML)
+            index = element.firstElementChild.innerHTML
+            console.log(index)
             element.remove()
+            xhr = new XMLHttpRequest()
+            xhr.open("GET", "/dellog?index="+index, true)
+            xhr.send()
         }
         function edit() {
 
