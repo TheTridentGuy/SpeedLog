@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
 import json
 import pathlib
+import secrets
+import hashlib
 
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(64)
+session
 
 
 with open("config.json", "r") as cfg:
@@ -11,6 +15,7 @@ with open("config.json", "r") as cfg:
     save_file = cfg.get("save_file")
     port = cfg.get("port")
     address = cfg.get("address")
+    pass_hash = cfg.get("pass_hash")
 save_data = []
 if pathlib.Path(save_file).exists():
     with open(save_file, "r") as f:
@@ -80,6 +85,20 @@ def dellog():
         return "success"
     else:
         return "missing index parameter"
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        password = request.values.get("password")
+        print(password)
+        if hashlib.sha512(password.encode("utf-8")).hexdigest() == pass_hash:
+            session["key"] = secrets.token_hex(64)
+            return redirect("/")
+        else:
+            return "incorrect password"
 
 
 if __name__ == '__main__':
