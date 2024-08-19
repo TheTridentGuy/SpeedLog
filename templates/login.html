@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeedLog - Login</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+        button {
+            background-color: #777;
+            border-radius: 0;
+            border: none;
+            padding: 1vmin;
+            color: #ddd;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        input {
+            font-size: larger;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/login" method="post">
+        <label for="password">Enter Your Password:</label>
+        <br>
+        <input type="password" name="password" id="password">
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
