@@ -9,6 +9,8 @@ app = Flask(__name__)
 with open("config.json", "r") as cfg:
     cfg = json.loads(cfg.read())
     save_file = cfg.get("save_file")
+    port = cfg.get("port")
+    address = cfg.get("address")
 save_data = []
 if pathlib.Path(save_file).exists():
     with open(save_file, "r") as f:
@@ -33,9 +35,8 @@ def about():
 @app.route("/view")
 def view():
     log_html = ""
-    for counter, entry in enumerate(save_data):
+    for entry in save_data:
         log_html += f"""<tr>
-            <td class="hidden">{counter}</td>
             <td><input type="checkbox" class="selcheck"></td>
             <td>{entry.get("callsign")}</td>
             <td>{entry.get("frequency")}</td>
@@ -82,4 +83,4 @@ def dellog():
 
 
 if __name__ == '__main__':
-    app.run("localhost", 80)  # set to 0.0.0.0 for production
+    app.run(address, port)  # set to 0.0.0.0 for production

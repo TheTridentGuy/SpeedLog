@@ -6,7 +6,7 @@ the frontend is pure HTML/JS/CSS. It is licensed under GNU GPL-V3
 - Python 3.8+
 - Flask
 # Running it:
-Simply run `python3 server.py`, or `sudo python3 server.py` permissions if using a port that requires them.
+Simply run `python3 server.py`, or `sudo python3 server.py` if using a port that requires sudo permissions.
 # Configuration:
 The `config.json` file allows you to change minor aspects of how the
 program runs. Here are the the currently available options:
