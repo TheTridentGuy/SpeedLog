@@ -117,6 +117,15 @@ def dellog():
         return redirect("/login")
 
 
+@app.route("/exportall")
+def exportall():
+    key = session.get("key")
+    if verify_key(key):
+        return save_data
+    else:
+        return redirect("/login")
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
