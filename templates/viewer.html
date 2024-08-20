@@ -182,7 +182,7 @@
     </div>
     <script>
         function remove(element) {
-            index = Array.from(element.parentNode.children).indexOf(element)
+            index = Array.from(element.parentNode.children).indexOf(element)-1
             console.log(index)
             element.remove()
             xhr = new XMLHttpRequest()
