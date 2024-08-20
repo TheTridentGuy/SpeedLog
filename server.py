@@ -117,11 +117,22 @@ def dellog():
         return redirect("/login")
 
 
-@app.route("/exportall")
-def exportall():
+@app.route("/export")
+def export():
     key = session.get("key")
     if verify_key(key):
-        return save_data
+        if request.values.get("indexes") == "all":
+            return save_data
+        else:
+            try:
+                indexes = json.loads(request.values.get("indexes"))
+                ret_data = []
+                for index in indexes:
+                    ret_data.append(save_data[index])
+                return ret_data
+            except json.JSONDecodeError:
+                return "invalid indexes parameter"
+
     else:
         return redirect("/login")
 
