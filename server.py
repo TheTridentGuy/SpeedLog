@@ -130,7 +130,7 @@ def login():
             session_keys[new_key] = time.time()
             return redirect("/")
         else:
-            return "incorrect password"
+            return render_template("loginerror.html")
 
 
 if __name__ == '__main__':

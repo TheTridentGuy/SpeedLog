@@ -164,8 +164,8 @@
     <div class="flexrow">
         <textarea name="notes" id="notes" class="flexrowitemfull" onfocus="ignorekey=true;ignoreclickflag=true"></textarea>
     </div>
-    <div class="flexrow" id="confirm" style="display:none">
-        <h3 class="flexrowitemfull">Press ENTER again to confirm log info</h3>
+    <div class="flexrow" id="confirm">
+        <h3 class="flexrowitemfull" id="msg"></h3>
     </div>
     <span>Made with &lt;3 by TheTridentGuy - <a href="/about">More Info</a></span>
     <script>
@@ -219,6 +219,7 @@
         autosetdate = true
         ignorekey = false
         ignoreclickflag = false
+        msg = ""
 
         $("notes").value = ""
         document.addEventListener("keydown", onkeydown)
@@ -290,6 +291,7 @@
                 decrementfocus()
             }else if(key == "ENTER"){
                 sendlog()
+                clearall()
             }else{
                 return
             }
@@ -306,18 +308,18 @@
             switch(focusindex){
                 case 0:
                     $("csfocus").innerHTML = `<div class="singledisplay">></div>`
-                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">ENTER to finish field and move to frequency</div>`
-                    $("confirm").style.display = "none"
+                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">ENTER to finish field and move to frequency</div>`          
+                    $("msg").innerHTML = msg
                     break
                 case 1:
                     $("csfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to clear charachter, or edit callsign if frequency is empty</div>`
-                    $("frqfocus").innerHTML = `<div class="singledisplay">></div>`
-                    $("confirm").style.display = "none"
+                    $("frqfocus").innerHTML = `<div class="singledisplay">></div>`          
+                    $("msg").innerHTML = msg
                     break
                 case 2:
                     $("csfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to clear charachter, or edit callsign if frequency is empty</div>`
-                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to return to editing frequency</div>`
-                    $("confirm").style.display = "block"
+                    $("frqfocus").innerHTML = `<div class="singledisplaysmall">BACKSPACE to return to editing frequency</div>`          
+                    $("msg").innerHTML = "Press ENTER again to submit log"
                     break
             }
         }
@@ -343,6 +345,17 @@
             xhr = new XMLHttpRequest()
             xhr.open("GET", "/log?log="+data, true)
             xhr.send()
+            msg = "Log Submitted Successfully"
+            $("msg").innerHTML = msg
+        }
+        function clearall(){
+            ignorekey = false
+            var fakeevent = {}
+            fakeevent.key = "backspace"
+            for(var i=0; i<15; i++){
+                onkeydown(fakeevent)
+            }
+            $("notes").value = ""
         }
     </script>
 </body>
