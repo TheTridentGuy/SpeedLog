@@ -127,8 +127,11 @@ def export():
             try:
                 indexes = json.loads(request.values.get("indexes"))
                 ret_data = []
-                for index in indexes:
-                    ret_data.append(save_data[index])
+                try:
+                    for index in indexes:
+                        ret_data.append(save_data[index])
+                except IndexError:
+                    return "index error"
                 return ret_data
             except json.JSONDecodeError:
                 return "invalid indexes parameter"
