@@ -149,6 +149,7 @@
             background-color: #555;
         }
         h1 {
+            margin: 0;
             position: absolute;
             top: 0px;
             right: 0px;
@@ -186,7 +187,7 @@
     </div>
     <div id="delconfirm" class="modal">
         <div class="modal-content">
-            <span class="title">Are you sure you want to delete <span id="delnum">1</span> entries?</span>
+            <span class="title">Are you sure you want to delete this entry?</span>
             <span class="close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
             <br>
             <br>
@@ -198,10 +199,14 @@
         function remove(element) {
             index = Array.from(element.parentNode.children).indexOf(element)-1
             console.log(index)
-            element.remove()
-            xhr = new XMLHttpRequest()
-            xhr.open("GET", "/dellog?index="+index, true)
-            xhr.send()
+            $("delconfirm").style.display = "block"
+            $("delaction").addEventListener("click", event => {
+                $("delconfirm").style.display = "none"
+                element.remove()
+                xhr = new XMLHttpRequest()
+                xhr.open("GET", "/dellog?index="+index, true)
+                xhr.send()
+            })
         }
         function getselected() {
             var counter = 0

@@ -47,7 +47,7 @@ def index():
     if verify_key(key):
         return render_template("index.html")
     else:
-        return redirect("/login")
+        return redirect("/login?redirect=/")
 
 
 @app.route("/about")
@@ -74,7 +74,7 @@ def view():
             </tr>"""
         return render_template("viewer.html", entries=log_html)
     else:
-        return redirect("/login")
+        return redirect("/login?redirect=/view")
 
 
 @app.route("/log")
@@ -94,7 +94,7 @@ def log():
         else:
             return "missing/invalid data"
     else:
-        return redirect("/login")
+        return redirect("/login?redirect=/")
 
 
 @app.route("/dellog")
@@ -114,7 +114,7 @@ def dellog():
         else:
             return "missing index parameter"
     else:
-        return redirect("/login")
+        return redirect("/login?redirect=/view")
 
 
 @app.route("/export")
@@ -137,12 +137,13 @@ def export():
                 return "invalid indexes parameter"
 
     else:
-        return redirect("/login")
+        return redirect("/login?redirect=/view")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
+        session["redirect"] = request.values.get("redirect")
         return render_template("login.html")
     else:
         password = request.values.get("password")
@@ -151,7 +152,10 @@ def login():
             new_key = secrets.token_hex(64)
             session["key"] = new_key
             session_keys[new_key] = time.time()
-            return redirect("/")
+            if session.get("redirect"):
+                return redirect(session.get("redirect"))
+            else:
+                return redirect("/")
         else:
             return render_template("loginerror.html")
 
