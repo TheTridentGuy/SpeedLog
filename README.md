@@ -2,6 +2,11 @@
 SpeedLog is a self-hosted, web-based amateur radio logging system. 
 It's backend is built using Python 3 and the Flask Framework, and 
 the frontend is pure HTML/JS/CSS. It is licensed under GNU GPL-V3
+# Basics:
+**Menu:**
+- Press the pen icon to go to the logging page
+- Press the eye icon to go to the log viewer
+- While in the viewer press the download icon to export the selected logs
 # Requirements:
 - Python 3.8+
 - Flask
