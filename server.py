@@ -13,18 +13,23 @@ session_keys = {}
 
 with open("config.json", "r") as cfg:
     cfg = json.loads(cfg.read())
-    save_file = cfg.get("save_file")
+    log_file = cfg.get("log_file")
     port = cfg.get("port")
     address = cfg.get("address")
-    pass_hash = cfg.get("pass_hash")
+    user_file = cfg.get("user_file")
+if pathlib.Path(user_file).exists():
+    with open(user_file, "r") as uf:
+        user_data = json.loads(uf.read())
+else:
+    user_data = {}
 save_data = []
-if pathlib.Path(save_file).exists():
-    with open(save_file, "r") as f:
+if pathlib.Path(log_file).exists():
+    with open(log_file, "r") as f:
         save_data = json.loads(f.read())
 
 
 def save_to_file():
-    with open(save_file, "w") as f:
+    with open(log_file, "w") as f:
         f.write(json.dumps(save_data))
 
 
@@ -145,9 +150,10 @@ def login():
         session["redirect"] = request.values.get("redirect")
         return render_template("login.html")
     else:
+        username = request.values.get("username")
         password = request.values.get("password")
-        print(password)
-        if hashlib.sha512(password.encode("utf-8")).hexdigest() == pass_hash:
+        print(username, password)
+        if hashlib.sha512(password.encode("utf-8")).hexdigest() == user_data.get(username):
             new_key = secrets.token_hex(64)
             session["key"] = new_key
             session_keys[new_key] = time.time()
