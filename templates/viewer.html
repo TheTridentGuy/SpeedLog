@@ -149,30 +149,6 @@
         .firstrow {
             height: 10vmin;
         }
-        .flexrow {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-        .flexrow input, .flexrow textarea {
-            flex-grow: 1;
-        }
-        input, select {
-            font-size: 3vmin;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        #editor {
-            font-size: 3vmin;
-            margin-top: auto;
-            height: 15vmin;
-            position: sticky;
-            bottom: 0;
-            background-color: #888;
-            padding: 2vmin;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -195,26 +171,6 @@
     </table>
     <p>Time to make more contacts...</p>
     <div class="filler"></div>
-    <div id="editor">
-        <div class="flexrow">
-            <label for="callsign">Callsign:</label>
-            <input type="text" name="callsign" id="callsign" placeholder="KCOOL">
-            <label for="frq">Frequency:</label>
-            <span>
-                <input type="number" name="frq1" id="frq1" min="0" max="999" placeholder="146">.<input type="number" name="frq2" id="frq2" min="0" max="999" placeholder="520">
-            </span>
-            <select name="unit" id="unit">
-                <option value="MHz">MHz</option>
-                <option value="kHz">kHz</option>
-            </select>
-            <label for="callsign">Date and time:</label>
-            <input type="datetime-local" name="callsign" id="callsign">
-        </div>
-        <label for="notes">Notes:</label>
-        <div class="flexrow">
-            <textarea name="notes" id="notes" placeholder="Notes..."></textarea>
-        </div>
-    </div>
     <div id="delconfirm" class="modal">
         <div class="modal-content">
             <span class="title">Are you sure you want to delete this entry?</span>

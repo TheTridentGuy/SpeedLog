@@ -368,9 +368,11 @@
             }
             var datetime = $("date").valueAsDate.toLocaleString()
             var notes = $("notes").value
+            var unit = ($("mhz").checked)?"MHz":"kHz"
             var data = JSON.stringify({
                 "callsign": callsign,
                 "frequency": frq,
+                "unit": unit,
                 "date": datetime,
                 "notes": notes
             })
