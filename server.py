@@ -168,6 +168,10 @@ def login():
         else:
             return render_template("loginerror.html")
 
+@app.route("/msg")
+def msg():
+    return  ""
+
 
 if __name__ == '__main__':
     app.run(address, port)  # set to 0.0.0.0 for production
