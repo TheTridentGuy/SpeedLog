@@ -22,7 +22,7 @@ if pathlib.Path(user_file).exists():
         user_data = json.loads(uf.read())
 else:
     user_data = {}
-save_data = []
+save_data = {}
 if pathlib.Path(log_file).exists():
     with open(log_file, "r") as f:
         save_data = json.loads(f.read())
@@ -65,17 +65,20 @@ def view():
     key = session.get("key")
     if verify_key(key):
         log_html = ""
-        for entry in save_data:
-            log_html += f"""<tr>
-                <td><input type="checkbox" class="selcheck"></td>
-                <td>{entry.get("callsign")}</td>
-                <td>{entry.get("frequency") + ' ' + str(entry.get("unit"))}</td>
-                <td>{entry.get("date")}</td>
-                <td>{entry.get("notes")}</td>
-                <td>
-                    <button onclick="remove(this.parentElement.parentElement)"><div class="icon baseline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div></button>
-                </td>
-            </tr>"""
+        user_logs = save_data.get(session.get("username"))
+        if user_logs:
+            log_html = ""
+            for entry in user_logs:
+                log_html += f"""<tr>
+                    <td><input type="checkbox" class="selcheck"></td>
+                    <td>{entry.get("callsign")}</td>
+                    <td>{entry.get("frequency") + ' ' + str(entry.get("unit"))}</td>
+                    <td>{entry.get("date")}</td>
+                    <td>{entry.get("notes")}</td>
+                    <td>
+                        <button onclick="remove(this.parentElement.parentElement)"><div class="icon baseline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div></button>
+                    </td>
+                </tr>"""
         return render_template("viewer.html", entries=log_html)
     else:
         return redirect("/login?redirect=/view")
@@ -92,7 +95,7 @@ def log():
             except json.JSONDecodeError:
                 return "invalid json"
             print(data)
-            save_data.append(data)
+            save_data[session.get("username")].append(data)
             save_to_file()
             return "success"
         else:
@@ -153,6 +156,7 @@ def login():
         username = request.values.get("username")
         password = request.values.get("password")
         print(username, password)
+        session["username"] = username
         if hashlib.sha512(password.encode("utf-8")).hexdigest() == user_data.get(username):
             new_key = secrets.token_hex(64)
             session["key"] = new_key
