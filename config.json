@@ -1,1 +1,7 @@
-{"log_file": "/Users/aidenbohlander/Desktop/test.log", "address":  "localhost", "port":  8080, "user_file":  "/Users/aidenbohlander/Desktop/test.users"}
+{
+  "log_file": "/Users/aidenbohlander/Desktop/test.log",
+  "address":  "localhost",
+  "port":  8080,
+  "user_file":  "/Users/aidenbohlander/Desktop/test.users",
+  "allow_acct_creation": false
+}

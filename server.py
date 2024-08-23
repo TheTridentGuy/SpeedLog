@@ -17,6 +17,7 @@ with open("config.json", "r") as cfg:
     port = cfg.get("port")
     address = cfg.get("address")
     user_file = cfg.get("user_file")
+    allow_acct_creation = cfg.get("allow_acct_creation")
 if pathlib.Path(user_file).exists():
     with open(user_file, "r") as uf:
         user_data = json.loads(uf.read())
@@ -167,6 +168,18 @@ def login():
                 return redirect("/")
         else:
             return render_template("loginerror.html")
+
+
+@app.route("/createacct", methods=["GET", "POST"])
+def createacct():
+    if not allow_acct_creation:
+        return render_template("message.html", header="Sorry, Account Creation is Disabled", body="")
+    if request.method == "GET":
+        return render_template("createacct.html")
+    else:
+        username = request.values.get("username")
+        password = request.values.get("password")
+        print(username, password)
 
 
 if __name__ == '__main__':
