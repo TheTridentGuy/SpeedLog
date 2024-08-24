@@ -47,6 +47,14 @@ def verify_key(key):
         return False
 
 
+def add_user(username, password):
+    with open(user_file, "w") as uf:
+        user_data[username] = hashlib.sha512(password.encode("utf-8")).hexdigest()
+        save_data[username] = {}
+        save_to_file()
+        uf.write(json.dumps(user_data))
+
+
 @app.route("/")
 def index():
     key = session.get("key")
@@ -179,7 +187,11 @@ def createacct():
     else:
         username = request.values.get("username")
         password = request.values.get("password")
+        if save_data.get(username):
+            return render_template("message.html", header="Sorry, that username is taken.", body="")
         print(username, password)
+        add_user(username, password)
+        return redirect("/login")
 
 
 if __name__ == '__main__':

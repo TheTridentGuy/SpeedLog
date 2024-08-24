@@ -3,5 +3,5 @@
   "address":  "localhost",
   "port":  8080,
   "user_file":  "/Users/aidenbohlander/Desktop/test.users",
-  "allow_acct_creation": false
+  "allow_acct_creation": true
 }
