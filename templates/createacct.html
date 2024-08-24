@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpeedLog - Create Account</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+        button, a {
+            background-color: #777;
+            border-radius: 0;
+            border: none;
+            padding: 1vmin;
+            color: #ddd;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        input {
+            font-size: larger;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <form action="/createacct" method="post">
@@ -15,11 +35,11 @@
         <br>
         <input type="password" name="password" id="password">
         <br>
-        <label for="password">Password:</label>
-        <br>
-        <input type="password" name="password" id="password">
+        <input type="checkbox" name="show" id="show" onchange="document.getElementById('password').type=(document.getElementById('password').type=='password')?'text':'password'">
+        <label for="show">Show Password</label>
         <br>
         <button type="submit">Create Account</button>
+        <a href="/login">Return to Login</a>
     </form>
 </body>
 </html>

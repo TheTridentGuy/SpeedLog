@@ -124,7 +124,7 @@ def dellog():
             except TypeError:
                 return "invalid json"
             print(index)
-            save_data.pop(index)
+            save_data[session.get("username")].pop(index)
             save_to_file()
             return "success"
         else:
@@ -138,14 +138,15 @@ def export():
     key = session.get("key")
     if verify_key(key):
         if request.values.get("indexes") == "all":
-            return save_data
+            return save_data[session.get("username")]
         else:
             try:
                 indexes = json.loads(request.values.get("indexes"))
                 ret_data = []
                 try:
+                    username = session.get("username")
                     for index in indexes:
-                        ret_data.append(save_data[index])
+                        ret_data.append(save_data[username][index])
                 except IndexError:
                     return "index error"
                 return ret_data

@@ -20,8 +20,7 @@ The `config.json` file allows you to configure server options. Here are the the 
 - `save_file`: the filepath to save all the logs to
 - `address`: address for the server, should be `localhost` for testing/local use, or `0.0.0.0` for production hosting
 - `port`: port to run the server on, i.e `80`
-- `pass_hash`: SHA-512 hexdigest of the password, defaults to SHA-512 of `password`
-- More options coming soon
+- More options coming soon TODO: Update this
 # Credits:
 - Made with <3 by @TheTridentGuy
 - Made possible by the Flask framework
