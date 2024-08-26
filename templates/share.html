@@ -93,12 +93,12 @@
     </style>
 </head>
 <body>   
+    <h2>{{ username }}'s contacts:</h2>
     <table>
         <tr class="firstrow">
             <th>Callsign</th>
             <th>Frequency</th>
             <th>Date/Time</th>
-            <th>Notes</th>
         </tr>
         {% autoescape false %}
             {{ entries }}

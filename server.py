@@ -133,6 +133,25 @@ def dellog():
         return redirect("/login?redirect=/view")
 
 
+@app.route("/share")
+def share():
+    user_logs = save_data.get(request.values.get("user"))
+    print(user_logs, request.values.get("user"))
+    if isinstance(user_logs, dict) or isinstance(user_logs, list):
+        log_html = ""
+        for entry in user_logs:
+            log_html += f"""<tr>
+                    <td>{entry.get("callsign")}</td>
+                    <td>{entry.get("frequency") + ' ' + str(entry.get("unit"))}</td>
+                    <td>{entry.get("date")}</td>
+                </tr>"""
+        return render_template("share.html", entries=log_html, username=request.values.get("user"))
+    elif session.get("username"):
+        return redirect("/share?user="+session.get("username"))
+    else:
+        return render_template("message.html", header="User Error", body="")
+
+
 @app.route("/export")
 def export():
     key = session.get("key")
@@ -196,4 +215,4 @@ def createacct():
 
 
 if __name__ == '__main__':
-    app.run(address, port)  # set to 0.0.0.0 for production
+    app.run(address, port)
