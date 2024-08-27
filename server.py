@@ -69,7 +69,7 @@ def verify_key(key):
 def add_user(username, password):
     with open(user_file, "w") as uf:
         user_data[username] = hashlib.sha512(password.encode("utf-8")).hexdigest()
-        save_data[username] = {}
+        save_data[username] = []
         save_to_file()
         uf.write(json.dumps(user_data))
 
@@ -156,7 +156,7 @@ def dellog():
 def share():
     user_logs = save_data.get(request.values.get("user"))
     print(user_logs, request.values.get("user"))
-    if isinstance(user_logs, dict) or isinstance(user_logs, list):
+    if isinstance(user_logs, list):
         log_html = ""
         for entry in user_logs:
             log_html += f"""<tr>
@@ -231,6 +231,14 @@ def createacct():
         print(username, password)
         add_user(username, password)
         return redirect("/login")
+
+
+@app.route("/logout")
+def logout():
+    key = session.get("key")
+    if key:
+        del session_keys[key]
+    return redirect("/login")
 
 
 if __name__ == '__main__':
