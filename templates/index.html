@@ -282,7 +282,7 @@
             key = e.key
             key = key.toLocaleUpperCase()
             if(autosetdate && csindex == 1){
-                document.getElementById("date").valueAsDate = new Date()
+                document.getElementById("date").valueAsNumber = new Date().valueOf()
             }
             if(((65 <= key.charCodeAt(0) && key.charCodeAt(0) <= 90) || (48 <= key.charCodeAt(0) && key.charCodeAt(0) <= 57)) && csindex <= 6 && key.length == 1){
                 $("display" + csindex).innerHTML = key

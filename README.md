@@ -1,5 +1,5 @@
 # SpeedLog
-SpeedLog is a self-hosted, web-based amateur radio logging system. 
+SpeedLog is a web-based amateur radio logging system. 
 It's backend is built using Python 3 and the Flask Framework, and 
 the frontend is pure HTML/JS/CSS. It is licensed under GNU GPL-V3
 # Basics:
@@ -20,7 +20,19 @@ The `config.json` file allows you to configure server options. Here are the the 
 - `save_file`: the filepath to save all the logs to
 - `address`: address for the server, should be `localhost` for testing/local use, or `0.0.0.0` for production hosting
 - `port`: port to run the server on, i.e `80`
-- More options coming soon TODO: Update this
+- `user_file`:  the file to store user data in
+- `allow_acct_creation`: whether or not to allow the creation of new accounts,
+should be a boolean `true`/`false` value.
+# Limitations:
+- Tested on Firefox and the Mozilla engine.
+- There used to be a bug on Chromium, but it should be fixed, however,
+this software hasn't been fully tested on Chromium.
+- Currently no mobile support
+# Mobile Spport:
+- SpeedLog does not currently support mobile, **however, it is expected to support it in the near future**
+# Official Deployments:
+- SpeedLog is currently deployed at https://speedlog.pythonanywhere.com
+- **DISCLAIMER:** we are not responsible for any data that you give us lost, made public, deleted or otherwise compromised, please back up your own logs, and **NEVER** put sensitive information in logs.
 # Credits:
 - Made with <3 by @TheTridentGuy
 - Made possible by the Flask framework
