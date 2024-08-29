@@ -1,3 +1,5 @@
+> **NOTICE:** we are aware of a few bugs that break SpeedLog on 
+> chromium-based browsers. If you are experiencing any issues we recommend Firefox.
 # SpeedLog
 SpeedLog is a web-based amateur radio logging system. 
 It's backend is built using Python 3 and the Flask Framework, and 

@@ -367,7 +367,7 @@
                 frq += $("frqdisplay"+i).innerHTML
                 if(i == 3){frq += "."}
             }
-            var datetime = $("date").valueAsDate.toLocaleString()
+            var datetime = new Date($("date").valueAsNumber).toLocaleString()
             var notes = $("notes").value
             var unit = ($("mhz").checked)?"MHz":"kHz"
             var data = JSON.stringify({
