@@ -2,6 +2,9 @@
 SpeedLog is a web-based amateur radio logging system. 
 It's backend is built using Python 3 and the Flask Framework, and 
 the frontend is pure HTML/JS/CSS. It is licensed under GNU GPL-V3
+# Official Deployments:
+# https://speedlog.pythonanywhere.com
+- **DISCLAIMER:** we are not responsible for any data that you give us lost, made public, deleted or otherwise compromised, please back up your own logs, and **NEVER** put sensitive information in logs.
 # Basics:
 **Menu:**
 - Press the pen icon to go to the logging page
@@ -30,9 +33,6 @@ this software hasn't been fully tested on Chromium.
 - Currently no mobile support
 # Mobile Spport:
 - SpeedLog does not currently support mobile, **however, it is expected to support it in the near future**
-# Official Deployments:
-- SpeedLog is currently deployed at https://speedlog.pythonanywhere.com
-- **DISCLAIMER:** we are not responsible for any data that you give us lost, made public, deleted or otherwise compromised, please back up your own logs, and **NEVER** put sensitive information in logs.
 # Credits:
 - Made with <3 by @TheTridentGuy
 - Made possible by the Flask framework
