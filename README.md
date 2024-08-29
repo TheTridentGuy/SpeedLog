@@ -1,5 +1,6 @@
 > **NOTICE:** we are aware of a few bugs that break SpeedLog on 
-> chromium-based browsers. If you are experiencing any issues we recommend Firefox.
+> chromium-based browsers. As of the latest deployment they should be fixed. If you are experiencing any issues we recommend Firefox.
+> Note that we currently do not support mobile platforms.
 # SpeedLog
 SpeedLog is a web-based amateur radio logging system. 
 It's backend is built using Python 3 and the Flask Framework, and 
@@ -19,7 +20,6 @@ the frontend is pure HTML/JS/CSS. It is licensed under GNU GPL-V3
 # Running it:
 Simply run `python3 server.py`, or `sudo python3 server.py` if using a port that requires sudo permissions.
 # Configuration:
-> The default value of the `pass_hash` config option is the SHA-512 of `password`. **It is highly recommended to change this from it's default value.**
 The `config.json` file allows you to configure server options. Here are the the currently available options:
 **required:**
 - `save_file`: the filepath to save all the logs to
